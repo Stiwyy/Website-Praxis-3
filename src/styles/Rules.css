@@ -1,0 +1,11 @@
+.rules {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 20px;
+}
+
+.rule img {
+    width: 100%;
+    height: auto;
+    border-radius: 10px;
+}

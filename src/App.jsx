@@ -1,30 +1,42 @@
-import React from "react";
-import "./App.css";
-import Footer from "./Footer";
-import Header from "./Header";
-import Products from "./Products";
-import { Routes, Route } from "react-router-dom";
-import Detail from "./Detail";
-import Cart from "./Cart";
+import React, { useState } from 'react';
+import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import LoginForm from './components/LoginForm';
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import VolleyballPage from './pages/VolleyballPage';
+import Gallery from './pages/Gallery';
+import Tips from './pages/Tips';
+import Rules from './pages/Rules';
+import Positions from './pages/Positions';
 
 export default function App() {
-  return (
-    <>
-      <div className="content">
+  const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const handleLogin = () => {
+    setIsLoggedIn(true);
+  };
 
-        <div></div>
-        <Header />
-        <main>
+  return (
+      <Router>
+        <div className="app">
+          {isLoggedIn && <Navbar />}
           <Routes>
-            <Route path="/" element={<h1>Just skate.</h1>} />
-              <Route path="/g" element={<h1>Just guguseli.</h1>} />
-            <Route path="/:category" element={<Products />} />
-            <Route path="/:category/:id" element={<Detail />} />
-            <Route path="/cart" element={<Cart />} />
+
+            Temporär auskommentiert:
+            {!isLoggedIn ? (
+              <Route path="/" element={<LoginForm onLogin={handleLogin} />} />
+            ) : (
+            <>
+              <Route path="/" element={<VolleyballPage />} />
+              <Route path="/gallery" element={<Gallery />} />
+              <Route path="/tips" element={<Tips />} />
+              <Route path="/rules" element={<Rules />} />
+              <Route path="/positions" element={<Positions />} />
+              <Route path="*" element={<Navigate to="/" />} />
+            </>
+             )}
           </Routes>
-        </main>
-      </div>
-      <Footer />
-    </>
+          {isLoggedIn && <Footer />}
+        </div>
+      </Router>
   );
 }

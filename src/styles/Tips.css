@@ -1,0 +1,25 @@
+.tips {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+.card {
+    width: 200px;
+    height: 100px;
+    background: lightblue;
+    border: 1px solid #000;
+    border-radius: 5px;
+    margin: 10px;
+    text-align: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    cursor: pointer;
+    transition: transform 0.3s ease;
+}
+
+.card.active {
+    transform: translateY(-20px);
+}

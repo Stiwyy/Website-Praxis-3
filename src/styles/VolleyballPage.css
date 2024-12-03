@@ -1,0 +1,32 @@
+.volleyball-container {
+    position: relative;
+    color: white;
+}
+
+.background-video {
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    z-index: -1;
+}
+
+.content {
+    padding: 2rem;
+}
+
+.text-image-section {
+    display: flex;
+    align-items: center;
+    margin: 2rem 0;
+}
+
+.text-image-section.reverse {
+    flex-direction: row-reverse;
+}
+
+.text-image-section img {
+    width: 50%;
+    height: auto;
+    margin: 0 1rem;
+}
