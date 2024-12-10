@@ -9,6 +9,7 @@ export default function LoginForm({ onLogin }) {
         confirmPassword: '',
     });
     const [errorMessage, setErrorMessage] = useState('');
+    const [successMessage, setSuccessMessage] = useState('');
 
     const handleChange = (e) => {
         const { name, value } = e.target;
@@ -18,7 +19,9 @@ export default function LoginForm({ onLogin }) {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setErrorMessage('');
+        setSuccessMessage('');
 
+        // Passwortvalidierung bei Registrierung
         if (isRegistering && formData.password !== formData.confirmPassword) {
             setErrorMessage('Passwörter stimmen nicht überein!');
             return;
@@ -29,10 +32,8 @@ export default function LoginForm({ onLogin }) {
                 ? 'http://127.0.0.1:8080/api/users/register'
                 : 'http://127.0.0.1:8080/api/users/login';
 
-            const method = 'POST';
-
             const response = await fetch(apiUrl, {
-                method: method,
+                method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                 },
@@ -43,18 +44,34 @@ export default function LoginForm({ onLogin }) {
                 }),
             });
 
-            if (!response.ok) {
-                const errorData = await response.json();
-                setErrorMessage(errorData?.message || 'Etwas ist schiefgelaufen.');
-                return;
+            const contentType = response.headers.get('content-type');
+            let data;
+
+            if (contentType && contentType.includes('application/json')) {
+                data = await response.json();
+            } else {
+                data = { message: await response.text() };
             }
 
-            const data = await response.json();
-            alert(data.message || 'Erfolg!');
-            onLogin();
+            if (!response.ok) {
+                throw new Error(data.message || 'Etwas ist schiefgelaufen.');
+            }
+
+            setSuccessMessage(data.message || 'Erfolg!');
+            if (!isRegistering) {
+                onLogin();
+            } else {
+                setIsRegistering(false);
+                setFormData({
+                    username: '',
+                    email: '',
+                    password: '',
+                    confirmPassword: '',
+                });
+            }
         } catch (error) {
             console.error('Fehler bei der Anfrage:', error);
-            setErrorMessage('Ein unerwarteter Fehler ist aufgetreten.');
+            setErrorMessage(error.message || 'Ein unerwarteter Fehler ist aufgetreten.');
         }
     };
 
@@ -73,17 +90,19 @@ export default function LoginForm({ onLogin }) {
                         required
                     />
                 </div>
-                <div>
-                    <label htmlFor="email">E-Mail:</label>
-                    <input
-                        type="email"
-                        id="email"
-                        name="email"
-                        value={formData.email}
-                        onChange={handleChange}
-                        required
-                    />
-                </div>
+                {isRegistering && (
+                    <div>
+                        <label htmlFor="email">E-Mail:</label>
+                        <input
+                            type="email"
+                            id="email"
+                            name="email"
+                            value={formData.email}
+                            onChange={handleChange}
+                            required
+                        />
+                    </div>
+                )}
                 <div>
                     <label htmlFor="password">Passwort:</label>
                     <input
@@ -109,11 +128,16 @@ export default function LoginForm({ onLogin }) {
                     </div>
                 )}
                 {errorMessage && <p className="error-message">{errorMessage}</p>}
+                {successMessage && <p className="success-message">{successMessage}</p>}
                 <button type="submit">{isRegistering ? 'Registrieren' : 'Anmelden'}</button>
             </form>
             <p>
                 {isRegistering ? 'Haben Sie bereits ein Konto?' : 'Noch kein Konto?'}{' '}
-                <button onClick={() => setIsRegistering(!isRegistering)}>
+                <button onClick={() => {
+                    setIsRegistering(!isRegistering);
+                    setErrorMessage('');
+                    setSuccessMessage('');
+                }}>
                     {isRegistering ? 'Anmelden' : 'Registrieren'}
                 </button>
             </p>
