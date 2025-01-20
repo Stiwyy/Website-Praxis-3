@@ -1,4 +1,5 @@
 import React, { useState } from 'react';
+import '../styles/App.css';
 
 export default function LoginForm({ onLogin }) {
     const [isRegistering, setIsRegistering] = useState(false);
@@ -21,7 +22,6 @@ export default function LoginForm({ onLogin }) {
         setErrorMessage('');
         setSuccessMessage('');
 
-        // Passwortvalidierung bei Registrierung
         if (isRegistering && formData.password !== formData.confirmPassword) {
             setErrorMessage('Passwörter stimmen nicht überein!');
             return;
@@ -76,7 +76,7 @@ export default function LoginForm({ onLogin }) {
     };
 
     return (
-        <div className="login-form">
+        <div className={'login-form'}>
             <h2>{isRegistering ? 'Registrieren' : 'Anmelden'}</h2>
             <form onSubmit={handleSubmit}>
                 <div>
@@ -127,8 +127,8 @@ export default function LoginForm({ onLogin }) {
                         />
                     </div>
                 )}
-                {errorMessage && <p className="error-message">{errorMessage}</p>}
-                {successMessage && <p className="success-message">{successMessage}</p>}
+                {errorMessage && <p className={'error-message'}>{errorMessage}</p>}
+                {successMessage && <p className={'success-message'}>{successMessage}</p>}
                 <button type="submit">{isRegistering ? 'Registrieren' : 'Anmelden'}</button>
             </form>
             <p>

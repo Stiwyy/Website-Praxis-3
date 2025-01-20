@@ -10,33 +10,33 @@ import Rules from './pages/Rules';
 import Positions from './pages/Positions';
 
 export default function App() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-  const handleLogin = () => {
-    setIsLoggedIn(true);
-  };
+    const [isLoggedIn, setIsLoggedIn] = useState(false);
 
-  return (
-      <Router>
-        <div className="app">
-          {isLoggedIn && <Navbar />}
-          <Routes>
+    const handleLogin = () => {
+        setIsLoggedIn(true);
+    };
 
-            Temporär auskommentiert:
-            {!isLoggedIn ? (
-              <Route path="/" element={<LoginForm onLogin={handleLogin} />} />
-            ) : (
-            <>
-              <Route path="/" element={<VolleyballPage />} />
-              <Route path="/gallery" element={<Gallery />} />
-              <Route path="/tips" element={<Tips />} />
-              <Route path="/rules" element={<Rules />} />
-              <Route path="/positions" element={<Positions />} />
-              <Route path="*" element={<Navigate to="/" />} />
-            </>
-             )}
-          </Routes>
-          {isLoggedIn && <Footer />}
-        </div>
-      </Router>
-  );
+    return (
+        <Router>
+            <div className="app">
+                {isLoggedIn && <Navbar />}
+                <Routes>
+                    {!isLoggedIn ? (
+                        <Route path="/" element={<LoginForm onLogin={handleLogin} />} />
+                    ) : (
+                        <>
+                            <Route path="/" element={<VolleyballPage />} />
+                            <Route path="/gallery" element={<Gallery />} />
+                            <Route path="/tips" element={<Tips />} />
+                            <Route path="/rules" element={<Rules />} />
+                            <Route path="/positions" element={<Positions />} />
+                            <Route path="*" element={<Navigate to="/" />} />
+                        </>
+                    )}
+                </Routes>
+                {isLoggedIn && <Footer />}
+            </div>
+        </Router>
+    );
 }
+

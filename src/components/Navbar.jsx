@@ -1,9 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 
 export default function Navbar() {
+    const [isMenuOpen, setMenuOpen] = useState(false);
+
+    const toggleMenu = () => {
+        setMenuOpen(!isMenuOpen);
+    };
+
     return (
-        <nav className="navbar">
+        <nav className={`navbar ${isMenuOpen ? 'active' : ''}`}>
+            <div className="logo">
+            </div>
             <ul>
                 <li><Link to="/">Startseite</Link></li>
                 <li><Link to="/gallery">Galerie</Link></li>
@@ -11,6 +19,9 @@ export default function Navbar() {
                 <li><Link to="/rules">Regeln</Link></li>
                 <li><Link to="/positions">Positionen</Link></li>
             </ul>
+            <span className="menu-toggle" onClick={toggleMenu}>
+                {isMenuOpen ? '×' : '☰'}
+            </span>
         </nav>
     );
 }

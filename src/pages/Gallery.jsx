@@ -1,23 +1,27 @@
-import React, { useState } from 'react';
-
+import React from 'react';
+import ImageGallery from 'react-image-gallery';
+import 'react-image-gallery/styles/css/image-gallery.css';
 
 const images = [
-    '/assets/images/gallery1.jpg',
-    '/assets/images/gallery2.jpg',
-    '/assets/images/gallery3.jpg',
+    {
+        original: 'https://picsum.photos/id/1018/1000/600/',
+        thumbnail: 'https://picsum.photos/id/1018/250/150/',
+    },
+    {
+        original: 'https://picsum.photos/id/1015/1000/600/',
+        thumbnail: 'https://picsum.photos/id/1015/250/150/',
+    },
+    {
+        original: 'https://picsum.photos/id/1019/1000/600/',
+        thumbnail: 'https://picsum.photos/id/1019/250/150/',
+    },
 ];
 
 export default function Gallery() {
-    const [currentIndex, setCurrentIndex] = useState(0);
-
-    const nextImage = () => setCurrentIndex((currentIndex + 1) % images.length);
-    const prevImage = () => setCurrentIndex((currentIndex - 1 + images.length) % images.length);
-
     return (
         <div className="gallery">
-            <button onClick={prevImage}>&lt;</button>
-            <img src={images[currentIndex]} alt={`Bild ${currentIndex + 1}`} />
-            <button onClick={nextImage}>&gt;</button>
+            <h2 className="gallery-title">Unsere Galerie</h2>
+            <ImageGallery items={images} />
         </div>
     );
 }
