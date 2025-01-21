@@ -72,7 +72,8 @@ input:focus {
 }
 
 .login-form button {
-    width: auto;
+    display: block;
+    width: 100%;
     padding: 12px 24px;
     background: linear-gradient(135deg, #6c63ff, #8f94fb);
     border: none;
@@ -81,7 +82,9 @@ input:focus {
     font-size: 16px;
     cursor: pointer;
     transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
 }
+
 
 .login-form button:hover {
     background: linear-gradient(135deg, #8f94fb, #6c63ff);
@@ -128,17 +131,29 @@ p {
 }
 
 p button {
-    background: none;
+    display: block;
+    width: 100%;
+    padding: 12px 24px;
+    background: linear-gradient(135deg, #6c63ff, #8f94fb);
     border: none;
-    color: #6c63ff;
-    text-decoration: underline;
+    border-radius: 8px;
+    color: #fff;
+    font-size: 16px;
     cursor: pointer;
-    font-size: 14px;
-    transition: color 0.3s ease;
+    transition: background 0.3s ease, transform 0.2s ease, box-shadow 0.3s ease;
+    margin: 0 auto;
+    text-align: center;
 }
 
+/* Hover and active states */
 p button:hover {
-    color: #8f94fb;
+    background: linear-gradient(135deg, #8f94fb, #6c63ff);
+    transform: translateY(-2px);
+    box-shadow: none;
+}
+
+p button:active {
+    transform: translateY(0);
 }
 
 .navbar {
@@ -561,6 +576,14 @@ p button:hover {
     }
 }
 
+body {
+    margin: 0;
+    padding: 0;
+    font-family: Arial, sans-serif;
+    background-color: #f5f5f5; /* Neutraler Hintergrund außerhalb der Volleyball-Seite */
+    color: black;
+}
+
 .volleyball-page {
     position: relative;
     width: 100%;
@@ -568,22 +591,27 @@ p button:hover {
     overflow: hidden;
     font-family: Arial, sans-serif;
     color: white;
+    background: linear-gradient(to bottom, white, #ff5722 60%, #ffcc00);
 }
 
 .content {
     display: flex;
+    flex-direction: column;
     justify-content: flex-start;
-    align-items: flex-start;
+    align-items: center;
     height: 100vh;
-    text-align: left;
+    text-align: center;
     padding: 20px;
 }
 
 .title {
     font-size: 5rem;
     font-weight: bold;
-    color: black;
+    color: white;
     position: relative;
+    margin: 0;
+    line-height: 1.2;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
 }
 
 .volleyball-icon-wrapper {
@@ -591,7 +619,7 @@ p button:hover {
     width: 60px;
     height: 60px;
     vertical-align: middle;
-    transition: all 0.3s ease;
+    transition: transform 0.3s ease;
 }
 
 .volleyball-icon {
@@ -599,12 +627,10 @@ p button:hover {
     height: auto;
 }
 
-
 .sticky {
     position: fixed;
     top: 30px;
-    left: 20px;
-    right: 20px;
+    transform: none;
 }
 
 .in-title {
@@ -612,6 +638,25 @@ p button:hover {
     top: 0;
     left: 0;
 }
+
+.intro {
+    max-width: 800px;
+    margin-top: 20px;
+    background: rgba(0, 0, 0, 0.5);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0px 4px 10px rgba(0, 0, 0, 0.3);
+    color: white;
+}
+
+
+.video-container {
+    margin-top: 40px;
+    width: 100%;
+    max-width: 800px;
+    text-align: center;
+}
+
 
 footer.footer {
     margin-top: auto;

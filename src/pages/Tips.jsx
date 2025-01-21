@@ -2,7 +2,7 @@ import React from 'react';
 import '../styles/App.css';
 
 const tips = [
-    { id: 1, title: 'Tipp 1: Aufschläge üben', content: 'Ein präziser Aufschlag ist entscheidend. Übe regelmäßig deinen Aufschlag, um präzise und unberechenbare Bälle zu schlagen.' },
+    { id: 1, title: 'Tipp 1: Aufschläge üben', content: 'Ein präziser Aufschlag ist entscheidend. Übe regelmässig deinen Aufschlag, um präzise und unberechenbare Bälle zu schlagen.' },
     { id: 2, title: 'Tipp 2: Kommunikation im Team', content: 'Volleyball ist ein Teamsport. Sprecht euch immer ab, damit ihr effizienter auf dem Feld agieren könnt.' },
     { id: 3, title: 'Tipp 3: Beweglichkeit verbessern', content: 'Achte auf deine Beweglichkeit. Schnell auf den Beinen zu sein hilft dir, dich besser zu positionieren und den Ball zu treffen.' },
     { id: 4, title: 'Tipp 4: Blocktechniken verbessern', content: 'Lerne, richtig zu blocken, um die Angriffe der Gegner zu stoppen. Dein Timing und die Handposition sind dabei entscheidend.' },
